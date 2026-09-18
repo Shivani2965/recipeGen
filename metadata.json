@@ -1,0 +1,6 @@
+{
+  "name": "SmartRecipe",
+  "description": "Discover recipes based on the ingredients in your kitchen with Spoonacular API, Firebase authentication, and PDF recipe exports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

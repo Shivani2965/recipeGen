@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 120 },
+        "email": { "type": "string", "maxLength": 255 },
+        "photoURL": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "email"]
+    },
+    "SavedRecipe": {
+      "title": "SavedRecipe",
+      "description": "Recipe saved by a user for offline or long-term reference",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "recipeId": { "type": "string", "maxLength": 64 },
+        "title": { "type": "string", "maxLength": 256 },
+        "image": { "type": "string", "maxLength": 1024 },
+        "summary": { "type": "string", "maxLength": 5000 },
+        "savedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "recipeId", "title"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "Recipe bookmarked as a favorite by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "recipeId": { "type": "string", "maxLength": 64 },
+        "title": { "type": "string", "maxLength": 256 },
+        "image": { "type": "string", "maxLength": 1024 },
+        "addedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "recipeId", "title"]
+    },
+    "SearchHistory": {
+      "title": "SearchHistory",
+      "description": "History of ingredient and filter searches performed by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "query": { "type": "string", "maxLength": 256 },
+        "searchedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId"]
+    },
+    "RecentlyViewed": {
+      "title": "RecentlyViewed",
+      "description": "Recipe recently viewed by an authenticated user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "recipeId": { "type": "string", "maxLength": 64 },
+        "title": { "type": "string", "maxLength": 256 },
+        "image": { "type": "string", "maxLength": 1024 },
+        "viewedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "recipeId", "title"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user accounts and profile details"
+    },
+    "/savedRecipes/{documentId}": {
+      "schema": "SavedRecipe",
+      "description": "Stores saved recipes indexed per user"
+    },
+    "/favorites/{documentId}": {
+      "schema": "Favorite",
+      "description": "Stores favorite recipes for a user"
+    },
+    "/searchHistory/{documentId}": {
+      "schema": "SearchHistory",
+      "description": "Stores previous recipe search queries"
+    },
+    "/recentlyViewed/{documentId}": {
+      "schema": "RecentlyViewed",
+      "description": "Stores history of recipe detail views for recommendations"
+    }
+  }
+}

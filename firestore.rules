@@ -1,0 +1,86 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidUser(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.name is string && data.name.size() <= 120 &&
+             data.email is string && data.email.size() <= 255;
+    }
+
+    function isValidSavedRecipe(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.recipeId is string && data.recipeId.size() <= 64 &&
+             data.title is string && data.title.size() <= 256;
+    }
+
+    function isValidFavorite(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.recipeId is string && data.recipeId.size() <= 64 &&
+             data.title is string && data.title.size() <= 256;
+    }
+
+    function isValidSearchHistory(data) {
+      return data.userId is string && data.userId == request.auth.uid;
+    }
+
+    function isValidRecentlyViewed(data) {
+      return data.userId is string && data.userId == request.auth.uid &&
+             data.recipeId is string && data.recipeId.size() <= 64 &&
+             data.title is string && data.title.size() <= 256;
+    }
+
+    match /users/{userId} {
+      allow get: if isSignedIn() && request.auth.uid == userId;
+      allow create, update: if isSignedIn() && request.auth.uid == userId && isValidUser(incoming());
+    }
+
+    match /savedRecipes/{documentId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidSavedRecipe(incoming());
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid && isValidSavedRecipe(incoming());
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /favorites/{documentId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidFavorite(incoming());
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /searchHistory/{documentId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidSearchHistory(incoming());
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    match /recentlyViewed/{documentId} {
+      allow get, list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidRecentlyViewed(incoming());
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid && isValidRecentlyViewed(incoming());
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+  }
+}
