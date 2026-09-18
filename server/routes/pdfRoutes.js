@@ -3,6 +3,7 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import { generateRecipePdf } from '../services/pdfService.js';
+import { getSampleRecipeById } from '../../src/server/services/sampleRecipes.js';
 
 const router = Router();
 const SPOONACULAR_BASE_URL = 'https://api.spoonacular.com';
@@ -52,7 +53,14 @@ async function handleRecipePdf(req, res, next) {
 
     let recipeData = req.body?.recipe;
 
-    // If recipe data is not already provided in POST body, fetch fresh from Spoonacular API
+    // If recipe data is not already provided in POST body, fetch fresh or use sample recipe
+    if (!recipeData) {
+      const sampleRecipe = getSampleRecipeById(id);
+      if (sampleRecipe) {
+        recipeData = sampleRecipe;
+      }
+    }
+
     if (!recipeData) {
       const apiKey = getSpoonacularKey();
       if (!apiKey) {
@@ -76,12 +84,15 @@ async function handleRecipePdf(req, res, next) {
         );
         recipeData = response.data;
       } catch (err) {
-        if (err.response) {
+        const fallback = getSampleRecipeById(id);
+        if (fallback) {
+          recipeData = fallback;
+        } else if (err.response) {
           const status = err.response.status;
           if (status === 404) {
             return res.status(404).json({
               success: false,
-              message: `Recipe with ID ${id} was not found on Spoonacular.`,
+              message: `Recipe with ID ${id} was not found.`,
             });
           }
           if (status === 401) {
@@ -101,16 +112,14 @@ async function handleRecipePdf(req, res, next) {
             success: false,
             message: `Spoonacular API error (${status}): ${err.response.data?.message || err.response.statusText}`,
           });
-        }
-
-        if (err.code === 'ECONNABORTED') {
+        } else if (err.code === 'ECONNABORTED') {
           return res.status(504).json({
             success: false,
             message: 'Request to Spoonacular timed out. Please try again.',
           });
+        } else {
+          throw err;
         }
-
-        throw err;
       }
     }
 
