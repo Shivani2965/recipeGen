@@ -80,7 +80,7 @@ const History = () => {
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-2xs space-y-4">
           <div className="flex items-center justify-between pb-4 border-b border-stone-100">
             <div className="flex items-center gap-2">
-              <Search className="w-5 h-5 text-emerald-700" />
+              <Search className="w-5 h-5 text-amber-700" />
               <h2 className="text-lg font-bold text-stone-900">Recent Kitchen Searches</h2>
             </div>
             {searches.length > 0 && <button
@@ -104,7 +104,7 @@ const History = () => {
                       <ChefHat className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-stone-900 group-hover:text-emerald-800">
+                      <p className="text-sm font-semibold text-stone-900 group-hover:text-amber-800">
                         {item.query || item.ingredients?.join(", ")}
                       </p>
                       {item.ingredients && item.ingredients.length > 0 && <p className="text-xs text-stone-400">
@@ -116,7 +116,7 @@ const History = () => {
                   <button
     type="button"
     onClick={() => handleRerunSearch(item)}
-    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-emerald-700 hover:text-white text-stone-700 text-xs font-semibold transition-colors cursor-pointer"
+    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-amber-700 hover:text-white text-stone-700 text-xs font-semibold transition-colors cursor-pointer"
   >
                     <span>Search Again</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ const History = () => {
   />
                   </div>
                   <div className="p-3">
-                    <h3 className="text-xs font-bold text-stone-900 line-clamp-2 group-hover:text-emerald-700">
+                    <h3 className="text-xs font-bold text-stone-900 line-clamp-2 group-hover:text-amber-700">
                       {item.title}
                     </h3>
                   </div>

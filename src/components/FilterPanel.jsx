@@ -55,7 +55,7 @@ const FilterPanel = ({
   }
       <div className="flex items-center justify-between pb-4 border-b border-stone-200">
         <div className="flex items-center gap-2">
-          <Filter className="w-5 h-5 text-emerald-700" />
+          <Filter className="w-5 h-5 text-amber-700" />
           <h3 className="font-bold text-base text-stone-900">Filter Recipes</h3>
         </div>
         <button
@@ -79,7 +79,7 @@ const FilterPanel = ({
     id="filter-sort-select"
     value={filters.sort || "popularity"}
     onChange={(e) => onChange("sort", e.target.value)}
-    className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-sm text-stone-800 focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
+    className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-sm text-stone-800 focus:ring-2 focus:ring-amber-600 focus:outline-hidden"
   >
           {SORT_OPTIONS.map((opt) => <option key={opt.value} value={opt.value}>
               {opt.label}
@@ -101,7 +101,7 @@ const FilterPanel = ({
       key={time.label}
       type="button"
       onClick={() => onChange("maxReadyTime", isSelected ? void 0 : time.value)}
-      className={`px-2.5 py-1.5 rounded-lg text-xs font-medium border text-center transition-colors cursor-pointer ${isSelected ? "bg-emerald-700 border-emerald-700 text-white shadow-2xs" : "bg-white border-stone-200 text-stone-700 hover:bg-stone-50"}`}
+      className={`px-2.5 py-1.5 rounded-lg text-xs font-medium border text-center transition-colors cursor-pointer ${isSelected ? "bg-amber-700 border-amber-700 text-white shadow-2xs" : "bg-white border-stone-200 text-stone-700 hover:bg-stone-50"}`}
     >
                 {time.label}
               </button>;
@@ -120,7 +120,7 @@ const FilterPanel = ({
     id="filter-cuisine-select"
     value={filters.cuisine || ""}
     onChange={(e) => onChange("cuisine", e.target.value)}
-    className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-sm text-stone-800 focus:ring-2 focus:ring-emerald-600 focus:outline-hidden"
+    className="w-full px-3 py-2 rounded-xl border border-stone-200 bg-white text-sm text-stone-800 focus:ring-2 focus:ring-amber-600 focus:outline-hidden"
   >
           <option value="">All Cuisines</option>
           {CUISINES.map((c) => <option key={c} value={c.toLowerCase()}>
@@ -143,7 +143,7 @@ const FilterPanel = ({
       key={d.id}
       type="button"
       onClick={() => onChange("diet", isSelected ? "" : d.id)}
-      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer ${isSelected ? "bg-emerald-100 border-emerald-300 text-emerald-900 font-semibold" : "bg-white border-stone-200 text-stone-600 hover:bg-stone-50"}`}
+      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors cursor-pointer ${isSelected ? "bg-amber-100 border-amber-300 text-amber-950 font-semibold" : "bg-white border-stone-200 text-stone-600 hover:bg-stone-50"}`}
     >
                 {d.label}
               </button>;
@@ -180,7 +180,7 @@ const FilterPanel = ({
           <button
     type="button"
     onClick={onApply}
-    className="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold transition-colors cursor-pointer"
+    className="w-full py-3 rounded-xl bg-amber-700 hover:bg-amber-800 text-white text-sm font-semibold transition-colors cursor-pointer"
   >
             Apply Filters
           </button>

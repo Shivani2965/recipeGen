@@ -106,7 +106,7 @@ const RecipeDetails = () => {
         <ErrorMessage message={error || "Recipe not found."} onRetry={() => window.location.reload()} />
         <Link
       to="/explore"
-      className="inline-flex items-center gap-2 mt-4 text-emerald-700 hover:text-emerald-800 font-semibold text-sm"
+      className="inline-flex items-center gap-2 mt-4 text-amber-700 hover:text-amber-800 font-semibold text-sm"
     >
           <ArrowLeft className="w-4 h-4" />
           Back to Recipe Discovery
@@ -216,7 +216,7 @@ const RecipeDetails = () => {
               <div className="flex flex-wrap gap-2 mb-1">
                 {dietaryTags.map((tag) => <span
     key={tag}
-    className="px-2.5 py-0.5 rounded-full bg-emerald-600/90 text-white text-xs font-semibold backdrop-blur-xs"
+    className="px-2.5 py-0.5 rounded-full bg-amber-600/90 text-white text-xs font-semibold backdrop-blur-xs"
   >
                     {tag}
                   </span>)}
@@ -233,14 +233,14 @@ const RecipeDetails = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-100 border-b border-stone-100 bg-stone-50/50 p-4">
             <div className="p-3 text-center">
               <div className="flex items-center justify-center gap-1 text-xs text-stone-500 mb-1">
-                <Clock className="w-4 h-4 text-emerald-600" />
+                <Clock className="w-4 h-4 text-amber-600" />
                 <span>Total Time</span>
               </div>
               <p className="font-bold text-base text-stone-900">{formatTime(recipe.readyInMinutes)}</p>
             </div>
             <div className="p-3 text-center">
               <div className="flex items-center justify-center gap-1 text-xs text-stone-500 mb-1">
-                <Users className="w-4 h-4 text-emerald-600" />
+                <Users className="w-4 h-4 text-amber-600" />
                 <span>Servings</span>
               </div>
               <p className="font-bold text-base text-stone-900">{recipe.servings || 4} people</p>
@@ -285,7 +285,7 @@ const RecipeDetails = () => {
             <div className="lg:col-span-5 p-6 sm:p-8 bg-stone-50/40">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <ChefHat className="w-5 h-5 text-emerald-700" />
+                  <ChefHat className="w-5 h-5 text-amber-700" />
                   <h3 className="font-bold text-lg text-stone-900">Ingredients</h3>
                 </div>
                 <span className="text-xs text-stone-500">
@@ -301,11 +301,11 @@ const RecipeDetails = () => {
     const isChecked = checkedIngredients[idx];
     return <label
       key={idx}
-      className={`flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer select-none ${isChecked ? "bg-emerald-50/70 border-emerald-200 text-stone-400 line-through" : "bg-white border-stone-200/80 text-stone-800 hover:border-emerald-300"}`}
+      className={`flex items-start gap-3 p-3 rounded-xl border transition-all cursor-pointer select-none ${isChecked ? "bg-amber-50/70 border-amber-200 text-stone-400 line-through" : "bg-white border-stone-200/80 text-stone-800 hover:border-amber-300"}`}
       onClick={() => toggleCheck(idx)}
     >
                       <div
-      className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 border transition-colors ${isChecked ? "bg-emerald-600 border-emerald-600 text-white" : "border-stone-300 bg-white"}`}
+      className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 border transition-colors ${isChecked ? "bg-amber-700 border-amber-700 text-white" : "border-stone-300 bg-white"}`}
     >
                         {isChecked && <Check className="w-3.5 h-3.5" />}
                       </div>
@@ -322,13 +322,13 @@ const RecipeDetails = () => {
   }
             <div className="lg:col-span-7 p-6 sm:p-8">
               <div className="flex items-center gap-2 mb-6">
-                <Sparkles className="w-5 h-5 text-emerald-700" />
+                <Sparkles className="w-5 h-5 text-amber-700" />
                 <h3 className="font-bold text-lg text-stone-900">Instructions</h3>
               </div>
 
               {instructionsList.length > 0 ? <ol className="space-y-6">
                   {instructionsList.map((step, idx) => <li key={idx} className="flex items-start gap-4">
-                      <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 font-bold text-sm flex items-center justify-center shrink-0 shadow-2xs">
+                      <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 font-bold text-sm flex items-center justify-center shrink-0 shadow-2xs">
                         {idx + 1}
                       </div>
                       <div className="flex-1 text-sm sm:text-base text-stone-700 leading-relaxed pt-0.5">

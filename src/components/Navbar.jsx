@@ -28,7 +28,7 @@ const Navbar = () => {
       console.error("Logout error:", err);
     }
   };
-  const navItemClasses = ({ isActive }) => `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-colors ${isActive ? "bg-emerald-100/70 text-emerald-900 font-semibold" : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"}`;
+  const navItemClasses = ({ isActive }) => `inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium transition-colors ${isActive ? "bg-amber-100/80 text-amber-950 font-semibold" : "text-stone-600 hover:text-stone-900 hover:bg-stone-100"}`;
   return <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -39,13 +39,13 @@ const Navbar = () => {
             <Link
     to="/"
     id="brand-logo-link"
-    className="flex items-center gap-2 text-emerald-900 font-black tracking-tight text-xl group"
+    className="flex items-center gap-2 text-stone-900 font-black tracking-tight text-xl group"
   >
-              <div className="w-9 h-9 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 rounded-xl bg-amber-700 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
                 <ChefHat className="w-5 h-5" />
               </div>
               <span className="font-extrabold text-stone-900">
-                Smart<span className="text-emerald-700">Recipe</span>
+                Smart<span className="text-amber-700">Recipe</span>
               </span>
             </Link>
 
@@ -61,7 +61,7 @@ const Navbar = () => {
               </NavLink>
               {currentUser && <>
                   <NavLink to="/dashboard" className={navItemClasses}>
-                    <LayoutDashboard className="w-4 h-4 text-emerald-700" />
+                    <LayoutDashboard className="w-4 h-4 text-amber-700" />
                     Dashboard
                   </NavLink>
                   <NavLink to="/favorites" className={navItemClasses}>
@@ -105,7 +105,7 @@ const Navbar = () => {
     id="profile-nav-btn"
     className="flex items-center gap-2 px-3 py-1.5 rounded-xl hover:bg-stone-100 text-stone-800 text-sm font-medium transition-colors"
   >
-                  <div className="w-7 h-7 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 flex items-center justify-center text-xs font-bold uppercase overflow-hidden">
+                  <div className="w-7 h-7 rounded-full bg-amber-100 border border-amber-300 text-amber-900 flex items-center justify-center text-xs font-bold uppercase overflow-hidden">
                     {userProfile?.photoURL ? <img src={userProfile.photoURL} alt="Avatar" className="w-full h-full object-cover" /> : userProfile?.name?.charAt(0) || currentUser.displayName?.charAt(0) || <User className="w-3.5 h-3.5" />}
                   </div>
                   <span className="max-w-[100px] truncate text-stone-800 font-medium">
@@ -132,7 +132,7 @@ const Navbar = () => {
                 <Link
     to="/register"
     id="nav-register-btn"
-    className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-semibold shadow-2xs transition-colors"
+    className="inline-flex items-center gap-1 px-4 py-2 rounded-xl bg-amber-700 hover:bg-amber-800 text-white text-sm font-semibold shadow-2xs transition-colors"
   >
                   <Sparkles className="w-3.5 h-3.5" />
                   Sign Up
@@ -256,7 +256,7 @@ const Navbar = () => {
                 <Link
     to="/register"
     onClick={() => setMobileMenuOpen(false)}
-    className="w-full py-2.5 rounded-xl bg-emerald-700 text-white text-center text-sm font-semibold"
+    className="w-full py-2.5 rounded-xl bg-amber-700 text-white text-center text-sm font-semibold"
   >
                   Sign Up
                 </Link>

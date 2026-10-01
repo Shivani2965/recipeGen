@@ -75,7 +75,7 @@ const SavedRecipes = () => {
             className={`p-3 rounded-xl border text-xs flex items-center justify-between ${
               notice.type === "error"
                 ? "bg-rose-50 border-rose-200 text-rose-700"
-                : "bg-emerald-50 border-emerald-200 text-emerald-800"
+                : "bg-amber-50 border-amber-200 text-amber-900"
             }`}
           >
             <span>{notice.message}</span>
@@ -101,7 +101,7 @@ const SavedRecipes = () => {
             <p className="text-stone-600 text-sm">No saved recipes match "{searchTerm}".</p>
             <button
     onClick={() => setSearchTerm("")}
-    className="mt-2 text-xs font-semibold text-emerald-700 hover:underline cursor-pointer"
+    className="mt-2 text-xs font-semibold text-amber-700 hover:underline cursor-pointer"
   >
               Clear search filter
             </button>
@@ -151,7 +151,7 @@ const SavedRecipes = () => {
 
                   <Link
     to={`/recipe/${recipe.recipeId}`}
-    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold transition-colors"
+    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold transition-colors"
   >
                     <span>Cook</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />

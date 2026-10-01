@@ -115,7 +115,7 @@ const RecipeCard = ({ recipe }) => {
                 <Flame className="w-3 h-3 text-orange-500" />
                 {calories}
               </span>}
-            {tags.slice(0, 1).map((t) => <span key={t} className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 text-[11px] font-medium">
+            {tags.slice(0, 1).map((t) => <span key={t} className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200/60 text-[11px] font-medium">
                 {t}
               </span>)}
           </div>
@@ -123,7 +123,7 @@ const RecipeCard = ({ recipe }) => {
           {
     /* Title */
   }
-          <h3 className="font-bold text-stone-900 text-base leading-snug line-clamp-2 group-hover:text-emerald-800 transition-colors">
+          <h3 className="font-bold text-stone-900 text-base leading-snug line-clamp-2 group-hover:text-amber-800 transition-colors">
             {recipe.title}
           </h3>
         </div>
@@ -138,7 +138,7 @@ const RecipeCard = ({ recipe }) => {
           <Link
     to={`/recipe/${recipeId}`}
     id={`view-recipe-${recipeId}`}
-    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-emerald-700 hover:text-white text-stone-800 text-xs font-semibold transition-all cursor-pointer"
+    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-stone-100 hover:bg-amber-700 hover:text-white text-stone-800 text-xs font-semibold transition-all cursor-pointer"
   >
             <span>View Recipe</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

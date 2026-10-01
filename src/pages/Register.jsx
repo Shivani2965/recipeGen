@@ -55,12 +55,12 @@ const Register = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
         <Link
     to="/"
-    className="inline-flex items-center gap-2 text-emerald-900 font-extrabold text-2xl"
+    className="inline-flex items-center gap-2 text-stone-900 font-extrabold text-2xl"
   >
-          <div className="w-10 h-10 rounded-2xl bg-emerald-700 flex items-center justify-center text-white shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-amber-700 flex items-center justify-center text-white shadow-xs">
             <ChefHat className="w-6 h-6" />
           </div>
-          <span>SmartRecipe</span>
+          <span>Smart<span className="text-amber-700">Recipe</span></span>
         </Link>
         <h1 className="text-2xl font-black text-stone-900 tracking-tight">Create your account</h1>
         <p className="text-sm text-stone-500">Save recipes, track ingredients, and download PDF cards</p>
@@ -89,7 +89,7 @@ const Register = () => {
     onChange={(e) => setName(e.target.value)}
     placeholder="Chef Jamie"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -110,7 +110,7 @@ const Register = () => {
     onChange={(e) => setEmail(e.target.value)}
     placeholder="jamie@example.com"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -131,7 +131,7 @@ const Register = () => {
     onChange={(e) => setPassword(e.target.value)}
     placeholder="••••••••"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -152,7 +152,7 @@ const Register = () => {
     onChange={(e) => setConfirmPass(e.target.value)}
     placeholder="••••••••"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -161,7 +161,7 @@ const Register = () => {
     id="register-submit-btn"
     type="submit"
     disabled={loading}
-    className="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:bg-stone-300 text-white font-bold text-sm shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-2"
+    className="w-full py-3 rounded-xl bg-amber-700 hover:bg-amber-800 disabled:bg-stone-300 text-white font-bold text-sm shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-2"
   >
               <span>{loading ? "Creating account..." : "Create Account"}</span>
               <ArrowRight className="w-4 h-4" />
@@ -208,7 +208,7 @@ const Register = () => {
           <div className="text-center pt-2">
             <p className="text-xs text-stone-500">
               Already have an account?{" "}
-              <Link to="/login" className="font-bold text-emerald-700 hover:underline">
+              <Link to="/login" className="font-bold text-amber-700 hover:underline">
                 Sign in
               </Link>
             </p>

@@ -73,23 +73,28 @@ const Home = () => {
   };
   return <div id="home-page-container" className="min-h-screen bg-stone-50 text-stone-900">
       {
-    /* Hero Section */
+    /* Hero Section with Custom Background Image */
   }
-      <section className="relative overflow-hidden bg-linear-to-b from-emerald-950 via-emerald-900 to-stone-900 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[radial-gradient(#15803d_1px,transparent_1px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
+      <section
+        className="relative overflow-hidden bg-cover bg-center py-20 sm:py-28 px-4 sm:px-6 lg:px-8 text-white border-b border-stone-800"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(28, 25, 23, 0.86), rgba(28, 25, 23, 0.74), rgba(28, 25, 23, 0.92)), url('/assets/hero-bg.jpg'), url('https://i.pinimg.com/736x/47/49/fc/4749fccbc993851cbe1f93950ee296ed.jpg')`
+        }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:28px_28px] opacity-15 pointer-events-none" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10 space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/70 border border-emerald-600/40 text-emerald-200 text-xs font-semibold backdrop-blur-xs shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/75 border border-amber-500/40 text-amber-200 text-xs font-semibold backdrop-blur-md shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>Smart Ingredient-Based Cooking</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-sm">
             Turn the ingredients you have into{" "}
-            <span className="text-emerald-400">something delicious.</span>
+            <span className="text-amber-400">something delicious.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-stone-300 max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="text-lg sm:text-xl text-stone-200 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-xs">
             Discover recipes based on what's already in your kitchen. No grocery runs, no wasted
             food, just hearty homemade meals.
           </p>
@@ -97,23 +102,23 @@ const Home = () => {
           {
     /* Large Ingredient Search Box */
   }
-          <div className="mt-8 bg-white/98 text-stone-900 p-6 rounded-3xl shadow-xl border border-stone-100 max-w-3xl mx-auto text-left">
+          <div className="mt-8 bg-white/98 text-stone-900 p-6 sm:p-7 rounded-3xl shadow-2xl border border-stone-200/80 max-w-3xl mx-auto text-left backdrop-blur-sm">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <ChefHat className="w-5 h-5 text-emerald-700" />
+                <ChefHat className="w-5 h-5 text-amber-700" />
                 <h2 className="font-bold text-base text-stone-900">What's in your kitchen?</h2>
               </div>
               <span className="text-xs text-stone-500 hidden sm:inline">Add multiple ingredients</span>
             </div>
 
             <IngredientSelector
-    ingredients={ingredients}
-    onAdd={addIngredient}
-    onRemove={removeIngredient}
-    onClear={clearIngredients}
-    onSearch={handleHeroSearch}
-    compact={false}
-  />
+              ingredients={ingredients}
+              onAdd={addIngredient}
+              onRemove={removeIngredient}
+              onClear={clearIngredients}
+              onSearch={handleHeroSearch}
+              compact={false}
+            />
           </div>
         </div>
       </section>
@@ -138,9 +143,9 @@ const Home = () => {
             <p className="text-sm text-stone-500">Curated cooking themes for every craving</p>
           </div>
           <Link
-    to="/explore"
-    className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-700 hover:text-emerald-800"
-  >
+            to="/explore"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-amber-700 hover:text-amber-800"
+          >
             Explore all
             <ArrowRight className="w-4 h-4" />
           </Link>
@@ -148,15 +153,15 @@ const Home = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {CATEGORIES.map((cat) => <button
-    key={cat.name}
-    type="button"
-    onClick={() => handleCategoryClick(cat)}
-    className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white border border-stone-200/80 hover:border-emerald-500 hover:shadow-md transition-all group text-center cursor-pointer"
-  >
+            key={cat.name}
+            type="button"
+            onClick={() => handleCategoryClick(cat)}
+            className="flex flex-col items-center justify-center p-4 rounded-2xl bg-white border border-stone-200/80 hover:border-amber-500 hover:shadow-md transition-all group text-center cursor-pointer"
+          >
               <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">
                 {cat.icon}
               </span>
-              <span className="font-bold text-xs text-stone-800 group-hover:text-emerald-800">
+              <span className="font-bold text-xs text-stone-800 group-hover:text-amber-800">
                 {cat.name}
               </span>
             </button>)}
@@ -169,7 +174,7 @@ const Home = () => {
       {currentUser && recentViews.length > 0 && <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-stone-200">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-emerald-700" />
+              <Clock className="w-5 h-5 text-amber-700" />
               <div>
                 <h2 className="text-2xl font-black text-stone-900 tracking-tight">
                   Recently Viewed
@@ -178,28 +183,28 @@ const Home = () => {
               </div>
             </div>
             <Link
-    to="/history"
-    className="text-sm font-semibold text-emerald-700 hover:text-emerald-800"
-  >
+              to="/history"
+              className="text-sm font-semibold text-amber-700 hover:text-amber-800"
+            >
               View full history
             </Link>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {recentViews.slice(0, 6).map((item) => <Link
-    key={item.recipeId}
-    to={`/recipe/${item.recipeId}`}
-    className="group bg-white rounded-xl border border-stone-200 overflow-hidden shadow-2xs hover:shadow-sm transition-all"
-  >
+              key={item.recipeId}
+              to={`/recipe/${item.recipeId}`}
+              className="group bg-white rounded-xl border border-stone-200 overflow-hidden shadow-2xs hover:shadow-sm transition-all"
+            >
                 <div className="aspect-square bg-stone-100 overflow-hidden">
                   <img
-    src={item.image || "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=300"}
-    alt={item.title}
-    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-  />
+                    src={item.image || "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=300"}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
                 </div>
                 <div className="p-2.5">
-                  <h4 className="text-xs font-bold text-stone-800 line-clamp-1 group-hover:text-emerald-700">
+                  <h4 className="text-xs font-bold text-stone-800 line-clamp-1 group-hover:text-amber-700">
                     {item.title}
                   </h4>
                 </div>
@@ -213,8 +218,8 @@ const Home = () => {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <div className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">
-              <Flame className="w-4 h-4 text-orange-500" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100/80 border border-amber-200/80 text-xs font-bold uppercase tracking-wider text-amber-900 mb-1.5">
+              <Flame className="w-3.5 h-3.5 text-amber-600" />
               Chef's Picks
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
@@ -222,34 +227,34 @@ const Home = () => {
             </h2>
           </div>
           <Link
-    to="/explore"
-    className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition-colors shadow-2xs"
-  >
+            to="/explore"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold transition-colors shadow-2xs"
+          >
             <Search className="w-3.5 h-3.5" />
             Explore More
           </Link>
         </div>
 
         {featuredError ? <ErrorMessage
-    message={featuredError}
-    onRetry={() => {
-      setFeaturedError(null);
-      setLoadingFeatured(true);
-      fetchPopularRecipes(8).then((r) => {
-        setFeaturedRecipes(r);
-        setLoadingFeatured(false);
-      }).catch((e) => {
-        setFeaturedError(e.message);
-        setLoadingFeatured(false);
-      });
-    }}
-  /> : <RecipeGrid
-    recipes={featuredRecipes}
-    loading={loadingFeatured}
-    skeletonCount={8}
-    emptyTitle="No featured recipes available"
-    emptyDescription="Ensure your Spoonacular API key is active to view live trending recipes."
-  />}
+          message={featuredError}
+          onRetry={() => {
+            setFeaturedError(null);
+            setLoadingFeatured(true);
+            fetchPopularRecipes(8).then((r) => {
+              setFeaturedRecipes(r);
+              setLoadingFeatured(false);
+            }).catch((e) => {
+              setFeaturedError(e.message);
+              setLoadingFeatured(false);
+            });
+          }}
+        /> : <RecipeGrid
+          recipes={featuredRecipes}
+          loading={loadingFeatured}
+          skeletonCount={8}
+          emptyTitle="No featured recipes available"
+          emptyDescription="Ensure your Spoonacular API key is active to view live trending recipes."
+        />}
       </section>
 
       {
@@ -258,7 +263,7 @@ const Home = () => {
       <section className="bg-stone-100/70 border-y border-stone-200/80 py-16 px-4 sm:px-6 lg:px-8 my-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-800">
               Why SmartRecipe?
             </span>
             <h2 className="text-3xl font-black text-stone-900 tracking-tight mt-1 mb-3">
@@ -271,7 +276,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-2xs space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-lg">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-black text-lg">
                 1
               </div>
               <h3 className="font-bold text-lg text-stone-900">List Your Ingredients</h3>
@@ -281,7 +286,7 @@ const Home = () => {
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-2xs space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-black text-lg">
+              <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-900 flex items-center justify-center font-black text-lg">
                 2
               </div>
               <h3 className="font-bold text-lg text-stone-900">Filter & Customize</h3>
@@ -291,7 +296,7 @@ const Home = () => {
             </div>
 
             <div className="bg-white p-6 rounded-2xl border border-stone-200/80 shadow-2xs space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center font-black text-lg">
+              <div className="w-12 h-12 rounded-xl bg-stone-200 text-stone-900 flex items-center justify-center font-black text-lg">
                 3
               </div>
               <h3 className="font-bold text-lg text-stone-900">Cook & Export PDF</h3>
@@ -304,44 +309,53 @@ const Home = () => {
       </section>
 
       {
-    /* Call to Action for Logged Out Users */
+    /* Call to Action for Logged Out Users - Secondary Custom Background */
   }
       {!currentUser && <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="bg-linear-to-br from-emerald-800 to-stone-900 text-white p-8 sm:p-12 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="space-y-3 text-center md:text-left">
+          <div
+            className="relative overflow-hidden rounded-3xl shadow-2xl p-8 sm:p-12 text-white bg-cover bg-center border border-stone-800 flex flex-col md:flex-row items-center justify-between gap-8"
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(28, 25, 23, 0.94) 0%, rgba(28, 25, 23, 0.88) 55%, rgba(28, 25, 23, 0.72) 100%), url('/assets/secondary-bg.jpg'), url('https://i.pinimg.com/736x/10/00/d6/1000d60ae0ec5b439b3f71325264fafa.jpg')`
+            }}
+          >
+            <div className="relative z-10 space-y-3 text-center md:text-left">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500/40 text-amber-200 text-xs font-semibold mb-1">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>Culinary Workspace</span>
+              </div>
               <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
                 Create your personal recipe vault
               </h3>
-              <p className="text-emerald-100 text-sm max-w-md">
+              <p className="text-stone-200 text-sm max-w-md">
                 Sign up for free to bookmark your favorite dishes, save recipe collections, track
                 what you cook, and export PDFs anytime.
               </p>
-              <div className="flex flex-wrap gap-4 pt-1 text-xs text-emerald-200">
+              <div className="flex flex-wrap gap-4 pt-1 text-xs text-amber-200">
                 <span className="flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
                   Cloud Saved Recipes
                 </span>
                 <span className="flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
                   Instant PDF Downloads
                 </span>
                 <span className="flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-4 h-4 text-amber-400" />
                   Personal Cook Dashboard
                 </span>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
+            <div className="relative z-10 flex flex-col sm:flex-row gap-3 w-full sm:w-auto shrink-0">
               <Link
-    to="/register"
-    className="px-6 py-3.5 rounded-xl bg-white text-emerald-950 font-bold text-sm text-center hover:bg-emerald-50 transition-colors shadow-sm"
-  >
+                to="/register"
+                className="px-6 py-3.5 rounded-xl bg-amber-600 text-white font-bold text-sm text-center hover:bg-amber-700 transition-colors shadow-md shadow-amber-950/20"
+              >
                 Sign Up Free
               </Link>
               <Link
-    to="/login"
-    className="px-6 py-3.5 rounded-xl bg-emerald-900/60 border border-emerald-700 text-white font-bold text-sm text-center hover:bg-emerald-900 transition-colors"
-  >
+                to="/login"
+                className="px-6 py-3.5 rounded-xl bg-stone-900/80 border border-stone-700 text-white font-bold text-sm text-center hover:bg-stone-900 transition-colors backdrop-blur-xs"
+              >
                 Log In
               </Link>
             </div>

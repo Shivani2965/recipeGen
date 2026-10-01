@@ -58,12 +58,12 @@ const Login = () => {
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
         <Link
     to="/"
-    className="inline-flex items-center gap-2 text-emerald-900 font-extrabold text-2xl"
+    className="inline-flex items-center gap-2 text-stone-900 font-extrabold text-2xl"
   >
-          <div className="w-10 h-10 rounded-2xl bg-emerald-700 flex items-center justify-center text-white shadow-xs">
+          <div className="w-10 h-10 rounded-2xl bg-amber-700 flex items-center justify-center text-white shadow-xs">
             <ChefHat className="w-6 h-6" />
           </div>
-          <span>SmartRecipe</span>
+          <span>Smart<span className="text-amber-700">Recipe</span></span>
         </Link>
         <h1 className="text-2xl font-black text-stone-900 tracking-tight">Welcome back, Chef!</h1>
         <p className="text-sm text-stone-500">Sign in to your account to access your recipe vault</p>
@@ -87,9 +87,9 @@ const Login = () => {
     type="button"
     onClick={handleGuestDemo}
     disabled={loading}
-    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-bold transition-colors cursor-pointer"
+    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 text-xs font-bold transition-colors cursor-pointer"
   >
-            <UserCheck className="w-4 h-4 text-emerald-700" />
+            <UserCheck className="w-4 h-4 text-amber-700" />
             <span>Continue as Demo Guest (Instant Access)</span>
           </button>
 
@@ -119,7 +119,7 @@ const Login = () => {
     onChange={(e) => setEmail(e.target.value)}
     placeholder="chef@smartrecipe.com"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -140,7 +140,7 @@ const Login = () => {
     onChange={(e) => setPassword(e.target.value)}
     placeholder="••••••••"
     required
-    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-300 text-sm text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600"
   />
               </div>
             </div>
@@ -149,7 +149,7 @@ const Login = () => {
     id="login-submit-btn"
     type="submit"
     disabled={loading}
-    className="w-full py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:bg-stone-300 text-white font-bold text-sm shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-2"
+    className="w-full py-3 rounded-xl bg-amber-700 hover:bg-amber-800 disabled:bg-stone-300 text-white font-bold text-sm shadow-xs transition-colors cursor-pointer flex items-center justify-center gap-2"
   >
               <span>{loading ? "Signing in..." : "Sign In"}</span>
               <ArrowRight className="w-4 h-4" />
@@ -192,7 +192,7 @@ const Login = () => {
           <div className="text-center pt-2">
             <p className="text-xs text-stone-500">
               Don't have an account yet?{" "}
-              <Link to="/register" className="font-bold text-emerald-700 hover:underline">
+              <Link to="/register" className="font-bold text-amber-700 hover:underline">
                 Create account
               </Link>
             </p>

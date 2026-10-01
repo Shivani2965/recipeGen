@@ -19,7 +19,7 @@ function App() {
   return <BrowserRouter>
       <AuthProvider>
         <RecipeProvider>
-          <div id="smartrecipe-app" className="min-h-screen flex flex-col bg-stone-50 text-stone-900 selection:bg-emerald-200 selection:text-emerald-950">
+          <div id="smartrecipe-app" className="min-h-screen flex flex-col bg-stone-50 text-stone-900 selection:bg-amber-200 selection:text-amber-950">
             <Navbar />
             <main className="flex-1">
               <Routes>

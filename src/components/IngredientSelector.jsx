@@ -49,7 +49,7 @@ const IngredientSelector = ({
     onChange={(e) => setInputVal(e.target.value)}
     onKeyDown={handleKeyDown}
     placeholder="Type an ingredient (e.g. chicken, garlic, tomato)..."
-    className="w-full pl-4 pr-10 py-3 rounded-xl border border-stone-300 bg-white text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-emerald-600 focus:border-transparent text-sm transition-all shadow-2xs"
+    className="w-full pl-4 pr-10 py-3 rounded-xl border border-stone-300 bg-white text-stone-900 placeholder-stone-400 focus:outline-hidden focus:ring-2 focus:ring-amber-600 focus:border-transparent text-sm transition-all shadow-2xs"
   />
             {inputVal && <button
     type="button"
@@ -75,7 +75,7 @@ const IngredientSelector = ({
     type="button"
     onClick={onSearch}
     disabled={ingredients.length === 0 || isSearching}
-    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:bg-stone-300 text-white text-sm font-semibold shadow-xs transition-colors cursor-pointer disabled:cursor-not-allowed shrink-0"
+    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-amber-700 hover:bg-amber-800 disabled:bg-stone-300 text-white text-sm font-semibold shadow-xs transition-colors cursor-pointer disabled:cursor-not-allowed shrink-0"
   >
               <ChefHat className="w-4 h-4" />
               <span>{isSearching ? "Finding..." : "Find Recipes"}</span>
@@ -90,13 +90,13 @@ const IngredientSelector = ({
             {ingredients.map((ing) => <span
     key={ing}
     id={`ingredient-tag-${ing}`}
-    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-100/80 text-emerald-900 border border-emerald-200/80 text-xs font-semibold tracking-wide animate-fadeIn"
+    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 text-amber-950 border border-amber-200/90 text-xs font-semibold tracking-wide animate-fadeIn"
   >
                 {ing}
                 <button
     type="button"
     onClick={() => onRemove(ing)}
-    className="hover:bg-emerald-200 text-emerald-800 rounded-full p-0.5 transition-colors cursor-pointer"
+    className="hover:bg-amber-200 text-amber-800 rounded-full p-0.5 transition-colors cursor-pointer"
     aria-label={`Remove ${ing}`}
   >
                   <X className="w-3 h-3" />

@@ -55,7 +55,7 @@ const Favorites = () => {
             <p className="text-stone-600 text-sm">No favorites match "{searchTerm}".</p>
             <button
     onClick={() => setSearchTerm("")}
-    className="mt-2 text-xs font-semibold text-emerald-700 hover:underline cursor-pointer"
+    className="mt-2 text-xs font-semibold text-amber-700 hover:underline cursor-pointer"
   >
               Clear search filter
             </button>

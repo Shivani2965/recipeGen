@@ -40,7 +40,7 @@ const Profile = () => {
   }
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-2xs">
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-            <div className="w-20 h-20 rounded-2xl bg-emerald-100 text-emerald-800 border-2 border-emerald-200 flex items-center justify-center font-black text-2xl uppercase shadow-xs overflow-hidden">
+            <div className="w-20 h-20 rounded-2xl bg-amber-100 text-amber-900 border-2 border-amber-200 flex items-center justify-center font-black text-2xl uppercase shadow-xs overflow-hidden">
               {userProfile?.photoURL ? <img
     src={userProfile.photoURL}
     alt="Profile"
@@ -103,7 +103,7 @@ const Profile = () => {
   }
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-2xs space-y-4">
           <div className="flex items-center gap-2 pb-3 border-b border-stone-100">
-            <Sparkles className="w-4 h-4 text-emerald-700" />
+            <Sparkles className="w-4 h-4 text-amber-700" />
             <h2 className="font-bold text-base text-stone-900">Account Preferences</h2>
           </div>
 
@@ -120,14 +120,14 @@ const Profile = () => {
     type="text"
     value={nameInput}
     onChange={(e) => setNameInput(e.target.value)}
-    className="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-stone-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-emerald-600"
+    className="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-stone-900 text-sm focus:outline-hidden focus:ring-2 focus:ring-amber-600"
     required
   />
             </div>
 
             {errorMsg && <p className="text-xs text-rose-600 font-medium">{errorMsg}</p>}
 
-            {saveSuccess && <p className="text-xs text-emerald-700 font-semibold flex items-center gap-1">
+            {saveSuccess && <p className="text-xs text-amber-800 font-semibold flex items-center gap-1">
                 <Check className="w-3.5 h-3.5" />
                 Profile updated successfully!
               </p>}
@@ -136,7 +136,7 @@ const Profile = () => {
     id="save-profile-btn"
     type="submit"
     disabled={saving}
-    className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 disabled:bg-stone-300 text-white font-bold text-xs shadow-2xs transition-colors cursor-pointer"
+    className="px-5 py-2.5 rounded-xl bg-amber-700 hover:bg-amber-800 disabled:bg-stone-300 text-white font-bold text-xs shadow-2xs transition-colors cursor-pointer"
   >
               {saving ? "Saving changes..." : "Save Changes"}
             </button>

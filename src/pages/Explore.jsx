@@ -56,8 +56,8 @@ const Explore = () => {
         <div className="bg-white p-6 rounded-3xl border border-stone-200/80 shadow-2xs">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-stone-100">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 mb-1">
-                <ChefHat className="w-4 h-4" />
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800 mb-1">
+                <ChefHat className="w-4 h-4 text-amber-600" />
                 Recipe Discovery Engine
               </div>
               <h1 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
@@ -73,12 +73,12 @@ const Explore = () => {
   }
             <div className="flex items-center gap-2 lg:hidden w-full sm:w-auto">
               <button
-    id="mobile-filter-btn"
-    type="button"
-    onClick={() => setMobileDrawerOpen(true)}
-    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-stone-300 bg-white text-stone-800 text-sm font-semibold shadow-2xs hover:bg-stone-50 transition-colors w-full sm:w-auto cursor-pointer"
-  >
-                <SlidersHorizontal className="w-4 h-4 text-emerald-700" />
+                id="mobile-filter-btn"
+                type="button"
+                onClick={() => setMobileDrawerOpen(true)}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-stone-300 bg-white text-stone-800 text-sm font-semibold shadow-2xs hover:bg-stone-50 transition-colors w-full sm:w-auto cursor-pointer"
+              >
+                <SlidersHorizontal className="w-4 h-4 text-amber-700" />
                 <span>Filters & Sorting</span>
               </button>
             </div>

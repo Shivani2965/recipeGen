@@ -9,11 +9,11 @@ const Footer = () => {
   }
           <div className="md:col-span-2 space-y-3">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
+              <div className="w-8 h-8 rounded-xl bg-amber-700 flex items-center justify-center text-white">
                 <ChefHat className="w-5 h-5" />
               </div>
               <span className="font-bold text-white text-xl tracking-tight">
-                Smart<span className="text-emerald-500">Recipe</span>
+                Smart<span className="text-amber-500">Recipe</span>
               </span>
             </div>
             <p className="text-sm text-stone-400 max-w-md leading-relaxed">
@@ -38,22 +38,22 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="hover:text-emerald-400 transition-colors">
+                <Link to="/" className="hover:text-amber-400 transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/explore" className="hover:text-emerald-400 transition-colors">
+                <Link to="/explore" className="hover:text-amber-400 transition-colors">
                   Ingredient Discovery
                 </Link>
               </li>
               <li>
-                <Link to="/dashboard" className="hover:text-emerald-400 transition-colors">
+                <Link to="/dashboard" className="hover:text-amber-400 transition-colors">
                   Cook Dashboard
                 </Link>
               </li>
               <li>
-                <Link to="/saved" className="hover:text-emerald-400 transition-colors">
+                <Link to="/saved" className="hover:text-amber-400 transition-colors">
                   Saved Recipes
                 </Link>
               </li>
@@ -82,7 +82,7 @@ const Footer = () => {
     href="https://spoonacular.com/food-api"
     target="_blank"
     rel="noreferrer"
-    className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 text-xs font-medium"
+    className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 text-xs font-medium"
   >
                   Spoonacular Documentation
                   <ExternalLink className="w-3 h-3" />
