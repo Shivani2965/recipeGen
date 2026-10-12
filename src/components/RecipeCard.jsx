@@ -1,11 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Heart, Bookmark, Clock, Star, Flame, ArrowUpRight } from "lucide-react";
+import { Heart, Bookmark, Clock, Star, Flame, ArrowUpRight, Youtube } from "lucide-react";
 import {
   formatTime,
   formatRating,
   getDifficulty,
   getCalories,
-  getDietaryTags
+  getDietaryTags,
+  getRecipeYouTubeUrl
 } from "../utils/helpers.js";
 import { useRecipes } from "../context/RecipeContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -64,6 +65,18 @@ const RecipeCard = ({ recipe }) => {
     /* Floating action buttons */
   }
         <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
+          <a
+            id={`yt-btn-${recipeId}`}
+            href={getRecipeYouTubeUrl(recipe)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="p-2 rounded-full backdrop-blur-md transition-all cursor-pointer bg-white/90 text-stone-700 hover:text-red-600 hover:bg-white"
+            aria-label="Watch video tutorial on YouTube"
+            title="Watch tutorial on YouTube"
+          >
+            <Youtube className="w-4 h-4 fill-current" />
+          </a>
           <button
     id={`fav-btn-${recipeId}`}
     type="button"

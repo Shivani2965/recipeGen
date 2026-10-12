@@ -109,6 +109,11 @@ export async function generateRecipePdf(recipe, outputStream = null) {
 
   // --- 4. Recipe Summary & Image ---
   const currentY = doc.y;
+  const youtubeUrl =
+    recipe.youtubeUrl ||
+    recipe.videoUrl ||
+    `https://www.youtube.com/results?search_query=${encodeURIComponent((recipe.title || 'recipe') + ' recipe tutorial')}`;
+
   if (imageBuffer) {
     try {
       doc.image(imageBuffer, 375, currentY, { width: 170, height: 115, fit: [170, 115] });
@@ -154,6 +159,35 @@ export async function generateRecipePdf(recipe, outputStream = null) {
       doc.moveDown(1);
     }
   }
+
+  // --- 4b. YouTube Video Link Banner ---
+  doc.moveDown(0.4);
+  if (doc.y > 680) doc.addPage();
+
+  const ytBoxY = doc.y;
+  const ytBoxHeight = 36;
+  doc
+    .roundedRect(50, ytBoxY, 495, ytBoxHeight, 5)
+    .fillAndStroke('#FEF2F2', '#FCA5A5');
+
+  doc
+    .fillColor('#DC2626')
+    .font('Helvetica-Bold')
+    .fontSize(9)
+    .text('▶  YOUTUBE VIDEO TUTORIAL', 62, ytBoxY + 7);
+
+  doc
+    .fillColor('#1D4ED8')
+    .font('Helvetica')
+    .fontSize(8.5)
+    .text(youtubeUrl, 62, ytBoxY + 20, {
+      link: youtubeUrl,
+      underline: true,
+      width: 470,
+      ellipsis: true,
+    });
+
+  doc.y = ytBoxY + ytBoxHeight + 12;
 
   // --- 5. Ingredients Section ---
   doc.moveDown(0.6);

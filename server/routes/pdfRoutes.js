@@ -130,6 +130,17 @@ async function handleRecipePdf(req, res, next) {
       });
     }
 
+    // Ensure YouTube URL is present
+    if (!recipeData.youtubeUrl) {
+      const sample = getSampleRecipeById(recipeData.id);
+      if (sample?.youtubeUrl) {
+        recipeData.youtubeUrl = sample.youtubeUrl;
+      } else {
+        const query = (recipeData.title || 'recipe') + ' recipe tutorial';
+        recipeData.youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+      }
+    }
+
     // Format safe download filename
     const safeTitle = (recipeData.title || `recipe-${id}`)
       .toLowerCase()

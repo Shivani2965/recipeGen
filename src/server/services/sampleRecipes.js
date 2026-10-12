@@ -17,6 +17,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: true,
     summary: "A velvety, restaurant-quality garlic parmesan fettuccine made in under 30 minutes with everyday kitchen staples.",
+    youtubeUrl: "https://www.youtube.com/watch?v=BsPxhT4PyaY",
     extendedIngredients: [
       { id: 1001, name: "butter", original: "3 tbsp unsalted butter", amount: 3, unit: "tbsp", aisle: "Dairy", image: "butter.jpg" },
       { id: 11215, name: "garlic", original: "4 cloves garlic, minced", amount: 4, unit: "cloves", aisle: "Produce", image: "garlic.jpg" },
@@ -64,6 +65,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: false,
     summary: "Juicy, herb-crusted pan-seared chicken breasts bathed in garlic lemon sauce with fresh oregano and rosemary.",
+    youtubeUrl: "https://www.youtube.com/watch?v=RdBEi3JhAj0",
     extendedIngredients: [
       { id: 5062, name: "chicken", original: "500g skinless chicken breasts", amount: 500, unit: "g", aisle: "Meat", image: "chicken-breast.jpg" },
       { id: 9150, name: "lemon", original: "1 fresh lemon, juiced and zested", amount: 1, unit: "", aisle: "Produce", image: "lemon.jpg" },
@@ -111,6 +113,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: false,
     cheap: true,
     summary: "Thin-crust homemade pizza topped with crushed San Marzano tomato sauce, fresh mozzarella, and sweet basil leaves.",
+    youtubeUrl: "https://www.youtube.com/watch?v=1-SJGQ2HLp8",
     extendedIngredients: [
       { id: 1026, name: "cheese", original: "200g fresh mozzarella cheese", amount: 200, unit: "g", aisle: "Cheese", image: "mozzarella.jpg" },
       { id: 11529, name: "tomato", original: "3 ripe roma tomatoes, sliced", amount: 3, unit: "", aisle: "Produce", image: "tomato.jpg" },
@@ -157,6 +160,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: true,
     summary: "Crisp cucumbers, juicy cherry tomatoes, kalamata olives, and creamy feta dressed in oregano lemon vinaigrette.",
+    youtubeUrl: "https://www.youtube.com/watch?v=Oh_LaCfhDFY",
     extendedIngredients: [
       { id: 11529, name: "tomato", original: "1 cup cherry tomatoes, halved", amount: 1, unit: "cup", aisle: "Produce", image: "cherry-tomatoes.jpg" },
       { id: 11206, name: "cucumber", original: "1 English cucumber, diced", amount: 1, unit: "", aisle: "Produce", image: "cucumber.jpg" },
@@ -203,6 +207,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: true,
     summary: "Silky roasted tomato soup infused with caramelized onions, garlic, and fresh basil, perfect with grilled cheese.",
+    youtubeUrl: "https://www.youtube.com/watch?v=0ChtgzruCgs",
     extendedIngredients: [
       { id: 11529, name: "tomato", original: "800g whole peeled canned tomatoes", amount: 800, unit: "g", aisle: "Canned", image: "canned-tomatoes.jpg" },
       { id: 11282, name: "onion", original: "1 yellow onion, chopped", amount: 1, unit: "", aisle: "Produce", image: "onion.jpg" },
@@ -250,6 +255,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: true,
     summary: "A golden French-style omelette filled with baby spinach, sweet bell peppers, and melted cheddar.",
+    youtubeUrl: "https://www.youtube.com/watch?v=s10etP1p2bU",
     extendedIngredients: [
       { id: 1123, name: "egg", original: "3 large organic eggs", amount: 3, unit: "", aisle: "Dairy", image: "eggs.jpg" },
       { id: 11457, name: "spinach", original: "1 cup fresh baby spinach", amount: 1, unit: "cup", aisle: "Produce", image: "spinach.jpg" },
@@ -296,6 +302,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: false,
     cheap: true,
     summary: "Fragrant, Japanese-style teppanyaki fried rice packed with browned garlic chips, scrambled egg, and green onion.",
+    youtubeUrl: "https://www.youtube.com/watch?v=8JVuG7ioPKI",
     extendedIngredients: [
       { id: 20444, name: "rice", original: "2 cups cooked chilled white or jasmine rice", amount: 2, unit: "cups", aisle: "Grains", image: "rice.jpg" },
       { id: 1123, name: "egg", original: "2 eggs, lightly beaten", amount: 2, unit: "", aisle: "Dairy", image: "eggs.jpg" },
@@ -343,6 +350,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: false,
     summary: "Crispy skin salmon fillets accompanied by tender tender asparagus tips sautéed in lemon garlic oil.",
+    youtubeUrl: "https://www.youtube.com/watch?v=VpxX1NE9uF8",
     extendedIngredients: [
       { id: 15076, name: "salmon", original: "2 fresh salmon fillets (6oz each)", amount: 2, unit: "fillets", aisle: "Seafood", image: "salmon.jpg" },
       { id: 11011, name: "asparagus", original: "1 bunch fresh asparagus, woody ends trimmed", amount: 1, unit: "bunch", aisle: "Produce", image: "asparagus.jpg" },
@@ -389,6 +397,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: true,
     cheap: true,
     summary: "Crispy on the outside, fluffy on the inside roasted baby potatoes tossed with rosemary, garlic, and sea salt.",
+    youtubeUrl: "https://www.youtube.com/watch?v=Wfzvd8l8Wjk",
     extendedIngredients: [
       { id: 11362, name: "potato", original: "700g baby potatoes, halved", amount: 700, unit: "g", aisle: "Produce", image: "potatoes.jpg" },
       { id: 2036, name: "rosemary", original: "2 tbsp fresh chopped rosemary", amount: 2, unit: "tbsp", aisle: "Produce", image: "rosemary.jpg" },
@@ -434,6 +443,7 @@ const SAMPLE_RECIPES = [
     veryHealthy: false,
     cheap: true,
     summary: "Decadent, rich chocolate brownies with crackly tops, chewy edges, and gooey centers.",
+    youtubeUrl: "https://www.youtube.com/watch?v=lIb_741_dIw",
     extendedIngredients: [
       { id: 1001, name: "butter", original: "1/2 cup melted butter", amount: 0.5, unit: "cup", aisle: "Dairy", image: "butter.jpg" },
       { id: 19335, name: "sugar", original: "1 cup granulated sugar", amount: 1, unit: "cup", aisle: "Baking", image: "sugar.jpg" },

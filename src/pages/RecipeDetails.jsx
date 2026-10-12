@@ -13,7 +13,10 @@ import {
   Check,
   ChefHat,
   Sparkles,
-  Info
+  Info,
+  Youtube,
+  ExternalLink,
+  Play
 } from "lucide-react";
 import {
   fetchRecipeDetails,
@@ -28,7 +31,9 @@ import {
   formatRating,
   getCalories,
   getProtein,
-  getDietaryTags
+  getDietaryTags,
+  getRecipeYouTubeUrl,
+  getYouTubeEmbedUrl
 } from "../utils/helpers.js";
 import { useRecipes } from "../context/RecipeContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -46,6 +51,7 @@ const RecipeDetails = () => {
   const [downloadingPdf, setDownloadingPdf] = useState(false);
   const [pdfError, setPdfError] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
   useEffect(() => {
     if (!id) return;
     let mounted = true;
@@ -119,6 +125,8 @@ const RecipeDetails = () => {
   const dietaryTags = getDietaryTags(recipe);
   const calories = getCalories(recipe);
   const protein = getProtein(recipe);
+  const youtubeUrl = getRecipeYouTubeUrl(recipe);
+  const embedUrl = getYouTubeEmbedUrl(youtubeUrl);
   const instructionsList = recipe.analyzedInstructions?.[0]?.steps?.map((s) => s.step) || (typeof recipe.instructions === "string" ? recipe.instructions.split(/(?:\r\n|\r|\n)+/).map((line) => stripHtml(line)).filter((line) => line.length > 5) : []);
   return <div id="recipe-details-container" className="min-h-screen bg-stone-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -139,6 +147,17 @@ const RecipeDetails = () => {
     /* Action bar */
   }
           <div className="flex items-center gap-2">
+            <a
+              id="details-youtube-link-btn"
+              href={youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+              title="Watch video tutorial on YouTube"
+            >
+              <Youtube className="w-3.5 h-3.5 fill-current" />
+              <span>Watch Video</span>
+            </a>
             <button
     id="details-share-btn"
     type="button"
@@ -264,16 +283,106 @@ const RecipeDetails = () => {
           </div>
 
           {
-    /* Summary */
+    /* Summary & YouTube Video Guide */
   }
-          {recipe.summary && <div className="p-6 sm:p-8 border-b border-stone-100">
-              <h2 className="text-xs font-bold uppercase tracking-wider text-stone-400 mb-2">
+          <div className="p-6 sm:p-8 border-b border-stone-100 bg-linear-to-b from-white to-stone-50/30">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+              <h2 className="text-xs font-bold uppercase tracking-wider text-stone-400">
                 About this dish
               </h2>
-              <p className="text-stone-700 text-sm sm:text-base leading-relaxed">
+              <a
+                href={youtubeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 hover:text-red-700 transition-colors cursor-pointer group"
+              >
+                <Youtube className="w-4 h-4 fill-current text-red-600 group-hover:scale-110 transition-transform" />
+                <span>Watch video tutorial on YouTube</span>
+                <ExternalLink className="w-3 h-3 text-red-400 group-hover:text-red-600" />
+              </a>
+            </div>
+
+            {recipe.summary && (
+              <p className="text-stone-700 text-sm sm:text-base leading-relaxed mb-4">
                 {stripHtml(recipe.summary)}
               </p>
-            </div>}
+            )}
+
+            {/* YouTube Callout Card in Description */}
+            <div className="mt-4 p-4 rounded-2xl bg-red-50/70 border border-red-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-start sm:items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                  <Youtube className="w-5 h-5 fill-current" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-stone-900 leading-snug">
+                    Step-by-Step Cooking Video
+                  </h4>
+                  <p className="text-xs text-stone-600">
+                    Watch the chef demonstrate ingredients, prep techniques, and culinary tips on YouTube.
+                  </p>
+                  <a
+                    href={youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-red-700 hover:text-red-800 underline break-all inline-flex items-center gap-1 mt-1 cursor-pointer"
+                  >
+                    <span>{youtubeUrl}</span>
+                    <ExternalLink className="w-3 h-3 shrink-0" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+                {embedUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setShowVideoModal((prev) => !prev)}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-red-300 bg-white hover:bg-red-100 text-red-700 text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>{showVideoModal ? "Hide Preview" : "Preview Video"}</span>
+                  </button>
+                )}
+                <a
+                  href={youtubeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+                >
+                  <span>Open in YouTube</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
+
+            {/* Embedded YouTube Video Preview */}
+            {showVideoModal && embedUrl && (
+              <div className="mt-4">
+                <div className="rounded-2xl overflow-hidden border border-red-200 shadow-md aspect-16/9 bg-stone-900 relative">
+                  <iframe
+                    src={embedUrl}
+                    title={`${recipe.title} Cooking Video`}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mt-2 flex items-center justify-between text-xs text-stone-500 px-1">
+                  <span>Official YouTube Tutorial Player</span>
+                  <a
+                    href={youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-red-600 hover:text-red-700 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <span>Watch directly on YouTube</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
 
           {
     /* Two-Column Recipe Breakdown */

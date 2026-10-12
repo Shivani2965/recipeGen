@@ -166,6 +166,39 @@ export function getDietaryTags(recipe) {
   return tags.slice(0, 3);
 }
 
+/**
+ * Resolves a high-quality YouTube link for a given recipe
+ * Checks recipe.youtubeUrl, recipe.videoUrl, or constructs an official YouTube search query URL
+ * @param {Object} recipe 
+ * @returns {string}
+ */
+export function getRecipeYouTubeUrl(recipe) {
+  if (!recipe) return "https://www.youtube.com";
+  if (recipe.youtubeUrl && typeof recipe.youtubeUrl === "string" && recipe.youtubeUrl.trim()) {
+    return recipe.youtubeUrl.trim();
+  }
+  if (recipe.videoUrl && typeof recipe.videoUrl === "string" && recipe.videoUrl.trim()) {
+    return recipe.videoUrl.trim();
+  }
+  const query = `${recipe.title || "recipe"} recipe tutorial`;
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+}
+
+/**
+ * Extracts a YouTube embed URL if a valid YouTube watch/short link is detected
+ * @param {string} url
+ * @returns {string|null}
+ */
+export function getYouTubeEmbedUrl(url) {
+  if (!url || typeof url !== "string") return null;
+  if (url.includes("/results?search_query=") || url.includes("/results")) return null;
+  const match = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  if (match && match[1]) {
+    return `https://www.youtube.com/embed/${match[1]}?rel=0`;
+  }
+  return null;
+}
+
 export default {
   stripHtml,
   formatTime,
@@ -173,5 +206,7 @@ export default {
   getDifficulty,
   getCalories,
   getProtein,
-  getDietaryTags
+  getDietaryTags,
+  getRecipeYouTubeUrl,
+  getYouTubeEmbedUrl
 };

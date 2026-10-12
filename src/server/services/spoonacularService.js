@@ -42,10 +42,23 @@ function getApiKey() {
 function isApiKeyConfigured() {
   return getApiKey() !== null;
 }
+function ensureRecipeYouTube(recipe) {
+  if (!recipe) return recipe;
+  if (!recipe.youtubeUrl) {
+    const title = recipe.title || "recipe";
+    recipe.youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(title + " recipe tutorial")}`;
+  }
+  return recipe;
+}
+
 async function searchRecipes(params) {
   const apiKey = getApiKey();
   if (!apiKey) {
-    return findSampleRecipes(params);
+    const data = findSampleRecipes(params);
+    if (data.results && Array.isArray(data.results)) {
+      data.results.forEach(ensureRecipeYouTube);
+    }
+    return data;
   }
 
   const queryParams = {
@@ -104,12 +117,17 @@ async function searchRecipes(params) {
       data.totalResults = 0;
     }
 
+    if (data.results && Array.isArray(data.results)) {
+      data.results.forEach(ensureRecipeYouTube);
+    }
+
     recipeCache.set(cacheKey, { data, timestamp: Date.now() });
     return data;
   } catch (err) {
     console.warn("Spoonacular search failed, falling back to curated recipes:", err.response?.data?.message || err.message);
     const fallback = findSampleRecipes(params);
     if (fallback.results && fallback.results.length > 0) {
+      fallback.results.forEach(ensureRecipeYouTube);
       return fallback;
     }
     if (err.response?.status === 402 || err.response?.status === 429) {
@@ -127,7 +145,7 @@ async function searchRecipes(params) {
 async function getRecipeById(id) {
   const sample = getSampleRecipeById(id);
   if (sample) {
-    return sample;
+    return ensureRecipeYouTube(sample);
   }
 
   const apiKey = getApiKey();
@@ -138,7 +156,7 @@ async function getRecipeById(id) {
   const cacheKey = `recipe_${id}`;
   const cached = recipeCache.get(cacheKey);
   if (cached && Date.now() - cached.timestamp < CACHE_TTL_MS) {
-    return cached.data;
+    return ensureRecipeYouTube(cached.data);
   }
 
   try {
@@ -149,12 +167,12 @@ async function getRecipeById(id) {
       },
       timeout: 10000
     });
-    const data = response.data;
+    const data = ensureRecipeYouTube(response.data);
     recipeCache.set(cacheKey, { data, timestamp: Date.now() });
     return data;
   } catch (err) {
     const fallbackSample = getSampleRecipeById(id);
-    if (fallbackSample) return fallbackSample;
+    if (fallbackSample) return ensureRecipeYouTube(fallbackSample);
     handleAxiosError(err);
   }
 }
@@ -162,7 +180,9 @@ async function getRecipeById(id) {
 async function getRandomRecipes(number = 8, tags = "") {
   const apiKey = getApiKey();
   if (!apiKey) {
-    return SAMPLE_RECIPES.slice(0, number);
+    const list = SAMPLE_RECIPES.slice(0, number);
+    list.forEach(ensureRecipeYouTube);
+    return list;
   }
 
   const cacheKey = `random_${number}_${tags}`;
@@ -181,11 +201,16 @@ async function getRandomRecipes(number = 8, tags = "") {
       timeout: 10000
     });
     const data = response.data;
+    if (data.recipes && Array.isArray(data.recipes)) {
+      data.recipes.forEach(ensureRecipeYouTube);
+    }
     recipeCache.set(cacheKey, { data, timestamp: Date.now() });
     return data;
   } catch (err) {
     console.warn("Spoonacular random fetch failed, falling back to curated sample recipes:", err.response?.data?.message || err.message);
-    return { recipes: SAMPLE_RECIPES.slice(0, number) };
+    const list = SAMPLE_RECIPES.slice(0, number);
+    list.forEach(ensureRecipeYouTube);
+    return { recipes: list };
   }
 }
 function handleAxiosError(err) {

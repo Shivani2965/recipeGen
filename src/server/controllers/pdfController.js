@@ -11,6 +11,10 @@ async function generateRecipePdfController(req, res, next) {
       res.status(400).json({ success: false, message: "Recipe data not found for PDF export." });
       return;
     }
+    if (!recipeData.youtubeUrl) {
+      const query = `${recipeData.title || "recipe"} recipe tutorial`;
+      recipeData.youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+    }
     const safeTitle = (recipeData.title || "recipe").toLowerCase().replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-").slice(0, 40);
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${safeTitle}.pdf"`);

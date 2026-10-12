@@ -14,7 +14,8 @@ SmartRecipe is a modern, full-stack culinary web application designed to help ho
   - Interactive **cooking checklist** (tap ingredients as you prep to cross them off).
   - Step-by-step **cooking instructions** with progress tracking.
   - Complete **macronutrient breakdown** (calories, protein, carbohydrates, fats).
-- **📄 Printable PDF Recipe Cards**: Export any recipe into a PDF card generated server-side with **PDFKit**, formatted with ingredients, instructions, and nutritional details.
+  - **YouTube Video Tutorial Links**: Direct watch links, embedded video previews, and video guides integrated directly into the recipe description.
+- **📄 Printable PDF Recipe Cards**: Export any recipe into a PDF card generated server-side with **PDFKit**, formatted with ingredients, instructions, nutritional details, and clickable **YouTube video tutorial links**.
 - **🔐 Firebase User Authentication**:
   - Secure Email & Password sign-up and sign-in.
   - One-click **Google Sign-In** via OAuth popup.

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Bookmark, Search, Trash2, FileDown, ArrowUpRight } from "lucide-react";
+import { Bookmark, Search, Trash2, FileDown, ArrowUpRight, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { downloadRecipePdf } from "../services/recipeService.js";
 import { EmptyState } from "../components/EmptyState.jsx";
-import { stripHtml } from "../utils/helpers.js";
+import { stripHtml, getRecipeYouTubeUrl } from "../utils/helpers.js";
 const SavedRecipes = () => {
   const { savedRecipes, toggleSaveRecipe } = useRecipes();
   const { currentUser } = useAuth();
@@ -139,15 +139,28 @@ const SavedRecipes = () => {
                 </div>
 
                 <div className="p-4 pt-0 border-t border-stone-100 flex items-center justify-between gap-2 mt-2">
-                  <button
-    type="button"
-    onClick={() => handleDownload(recipe)}
-    disabled={downloadingId === recipe.recipeId}
-    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700 text-xs font-semibold transition-colors cursor-pointer"
-  >
-                    <FileDown className="w-3.5 h-3.5" />
-                    <span>{downloadingId === recipe.recipeId ? "PDF..." : "PDF"}</span>
-                  </button>
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => handleDownload(recipe)}
+                      disabled={downloadingId === recipe.recipeId}
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700 text-xs font-semibold transition-colors cursor-pointer"
+                    >
+                      <FileDown className="w-3.5 h-3.5" />
+                      <span>{downloadingId === recipe.recipeId ? "PDF..." : "PDF"}</span>
+                    </button>
+
+                    <a
+                      href={getRecipeYouTubeUrl(recipe)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 text-xs font-semibold transition-colors cursor-pointer"
+                      title="Watch on YouTube"
+                    >
+                      <Youtube className="w-3.5 h-3.5 fill-current" />
+                      <span>Video</span>
+                    </a>
+                  </div>
 
                   <Link
     to={`/recipe/${recipe.recipeId}`}
