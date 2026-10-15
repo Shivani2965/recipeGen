@@ -46,6 +46,20 @@ const RecipeProvider = ({ children }) => {
       setSavedRecipes([]);
       return;
     }
+    // If local guest session or unauthenticated with Firebase
+    if (currentUser.isLocalGuest || !currentUser.email || currentUser.email === "guest@smartrecipe.demo") {
+      try {
+        const localFavs = JSON.parse(localStorage.getItem(`smartrecipe_favs_${currentUser.uid}`) || "[]");
+        const localSaved = JSON.parse(localStorage.getItem(`smartrecipe_saved_${currentUser.uid}`) || "[]");
+        setFavorites(localFavs);
+        setSavedRecipes(localSaved);
+      } catch {
+        setFavorites([]);
+        setSavedRecipes([]);
+      }
+      return;
+    }
+
     try {
       const [favs, saved] = await Promise.all([
         getFavorites(currentUser.uid),
@@ -54,7 +68,16 @@ const RecipeProvider = ({ children }) => {
       setFavorites(favs);
       setSavedRecipes(saved);
     } catch (err) {
-      console.error("Error fetching user recipe collections:", err);
+      console.warn("Falling back to local storage for user recipe collections:", err);
+      try {
+        const localFavs = JSON.parse(localStorage.getItem(`smartrecipe_favs_${currentUser.uid}`) || "[]");
+        const localSaved = JSON.parse(localStorage.getItem(`smartrecipe_saved_${currentUser.uid}`) || "[]");
+        setFavorites(localFavs);
+        setSavedRecipes(localSaved);
+      } catch {
+        setFavorites([]);
+        setSavedRecipes([]);
+      }
     }
   }, [currentUser]);
   useEffect(() => {
@@ -143,13 +166,18 @@ const RecipeProvider = ({ children }) => {
     if (!currentUser) return false;
     const recipeId = String(recipe.id || recipe.recipeId);
     const currentlyFav = isFavorite(recipeId);
+    const isGuest = currentUser.isLocalGuest || currentUser.email === "guest@smartrecipe.demo";
+
     if (currentlyFav) {
-      setFavorites((prev) => prev.filter((f) => String(f.recipeId) !== recipeId));
-      try {
-        await removeFavorite(currentUser.uid, recipeId);
-      } catch (err) {
-        await refreshUserCollections();
-        throw err;
+      const nextFavs = favorites.filter((f) => String(f.recipeId) !== recipeId);
+      setFavorites(nextFavs);
+      localStorage.setItem(`smartrecipe_favs_${currentUser.uid}`, JSON.stringify(nextFavs));
+      if (!isGuest) {
+        try {
+          await removeFavorite(currentUser.uid, recipeId);
+        } catch (err) {
+          console.warn("Could not remove favorite from Firestore:", err);
+        }
       }
       return false;
     } else {
@@ -158,14 +186,17 @@ const RecipeProvider = ({ children }) => {
         recipeId,
         title: recipe.title || "Untitled",
         image: recipe.image || "",
-        addedAt: (/* @__PURE__ */ new Date()).toISOString()
+        addedAt: new Date().toISOString()
       };
-      setFavorites((prev) => [tempFav, ...prev]);
-      try {
-        await addFavorite(currentUser.uid, recipe);
-      } catch (err) {
-        await refreshUserCollections();
-        throw err;
+      const nextFavs = [tempFav, ...favorites];
+      setFavorites(nextFavs);
+      localStorage.setItem(`smartrecipe_favs_${currentUser.uid}`, JSON.stringify(nextFavs));
+      if (!isGuest) {
+        try {
+          await addFavorite(currentUser.uid, recipe);
+        } catch (err) {
+          console.warn("Could not sync favorite to Firestore:", err);
+        }
       }
       return true;
     }
@@ -174,13 +205,18 @@ const RecipeProvider = ({ children }) => {
     if (!currentUser) return false;
     const recipeId = String(recipe.id || recipe.recipeId);
     const currentlySaved = isSaved(recipeId);
+    const isGuest = currentUser.isLocalGuest || currentUser.email === "guest@smartrecipe.demo";
+
     if (currentlySaved) {
-      setSavedRecipes((prev) => prev.filter((s) => String(s.recipeId) !== recipeId));
-      try {
-        await removeSavedRecipe(currentUser.uid, recipeId);
-      } catch (err) {
-        await refreshUserCollections();
-        throw err;
+      const nextSaved = savedRecipes.filter((s) => String(s.recipeId) !== recipeId);
+      setSavedRecipes(nextSaved);
+      localStorage.setItem(`smartrecipe_saved_${currentUser.uid}`, JSON.stringify(nextSaved));
+      if (!isGuest) {
+        try {
+          await removeSavedRecipe(currentUser.uid, recipeId);
+        } catch (err) {
+          console.warn("Could not remove saved recipe from Firestore:", err);
+        }
       }
       return false;
     } else {
@@ -190,14 +226,17 @@ const RecipeProvider = ({ children }) => {
         title: recipe.title || "Untitled",
         image: recipe.image || "",
         summary: recipe.summary || "",
-        savedAt: (/* @__PURE__ */ new Date()).toISOString()
+        savedAt: new Date().toISOString()
       };
-      setSavedRecipes((prev) => [tempSaved, ...prev]);
-      try {
-        await saveRecipe(currentUser.uid, recipe);
-      } catch (err) {
-        await refreshUserCollections();
-        throw err;
+      const nextSaved = [tempSaved, ...savedRecipes];
+      setSavedRecipes(nextSaved);
+      localStorage.setItem(`smartrecipe_saved_${currentUser.uid}`, JSON.stringify(nextSaved));
+      if (!isGuest) {
+        try {
+          await saveRecipe(currentUser.uid, recipe);
+        } catch (err) {
+          console.warn("Could not sync saved recipe to Firestore:", err);
+        }
       }
       return true;
     }

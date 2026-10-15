@@ -69,6 +69,7 @@ service cloud.firestore {
       allow get: if isSignedIn() && (resource == null || resource.data.userId == request.auth.uid);
       allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
       allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidFavorite(incoming());
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid && isValidFavorite(incoming());
       allow delete: if isSignedIn() && (resource == null || resource.data.userId == request.auth.uid);
     }
 
@@ -76,6 +77,7 @@ service cloud.firestore {
       allow get: if isSignedIn() && (resource == null || resource.data.userId == request.auth.uid);
       allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
       allow create: if isSignedIn() && incoming().userId == request.auth.uid && isValidSearchHistory(incoming());
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid && incoming().userId == request.auth.uid && isValidSearchHistory(incoming());
       allow delete: if isSignedIn() && (resource == null || resource.data.userId == request.auth.uid);
     }
 
